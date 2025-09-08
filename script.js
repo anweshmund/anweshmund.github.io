@@ -20,6 +20,25 @@ window.addEventListener("load", () => {
     },
   });
 
+  // CV download functionality
+const cvButton = document.querySelector(".cv-download");
+
+cvButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  // Direct download URL from Google Drive
+  const downloadUrl = "https://drive.google.com/uc?export=download&id=1SKghxNAbGj_6f6Tvz2KP4cb3gp6m-1jx";
+
+  // Create a temporary anchor element to start download
+  const a = document.createElement("a");
+  a.href = downloadUrl;
+  a.download = "Anwesh_mund(Resume).pdf"; // This name will be used for the downloaded file
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  alert("CV download started!");
+});
   // Initial animations
   initializeAnimations();
 
@@ -147,25 +166,7 @@ function initializeScrollAnimations() {
     duration: 1,
   });
 
-  // Tech stack icons animation
-
-  gsap.from(".tech-icon", {
-    scrollTrigger: {
-      trigger: ".tech-stack",
-
-      start: "top center+=100",
-
-      toggleActions: "play none none reverse",
-    },
-
-    y: 50,
-
-    opacity: 0,
-
-    duration: 0.5,
-
-    stagger: 0.2,
-  });
+ 
 
   // Project cards animation
 
@@ -219,6 +220,42 @@ function initializeScrollAnimations() {
     duration: 0.5,
 
     stagger: 0.2,
+  });
+
+  // Animate skills card on scroll
+  gsap.fromTo(
+    ".skills-card",
+    { opacity: 0, y: 40 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".skills-section",
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    }
+  );
+
+  gsap.utils.toArray(".skill-item").forEach((item, i) => {
+    gsap.fromTo(
+      item,
+      { opacity: 0, scale: 0.9 },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.7,
+        delay: 0.15 * i,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: item,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
   });
 }
 
@@ -474,7 +511,6 @@ function initializeFooterAnimations() {
   });
 }
 
-// Update the typing animation function
 function initializeTypingAnimation() {
   const professionElement = document.querySelector(".profession");
   const professions = [
@@ -482,17 +518,17 @@ function initializeTypingAnimation() {
     "UI/UX Designer",
     "Problem Solver",
     "Creative Thinker",
-    "Full Stack Developer"
+    "Full Stack Developer",
   ];
-  
+
   let professionIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
 
-  const typingSpeed = 100; // Speed for typing
-  const deletingSpeed = 50; // Speed for deleting
-  const wordDelay = 2000; // Delay after typing word
-  const deleteDelay = 1000; // Delay before deleting
+  const typingSpeed = 100;
+  const deletingSpeed = 50;
+  const wordDelay = 2000;
+  const deleteDelay = 1000;
 
   function type() {
     const currentProfession = professions[professionIndex];
@@ -526,22 +562,67 @@ function initializeTypingAnimation() {
 }
 
 // Add mouse move parallax effect to the hero section
-document.addEventListener('mousemove', (e) => {
-  const hero = document.querySelector('.hero');
+document.addEventListener("mousemove", (e) => {
+  const hero = document.querySelector(".hero");
   const mouseX = e.clientX / window.innerWidth - 0.5;
   const mouseY = e.clientY / window.innerHeight - 0.5;
 
-  gsap.to('.hero-text', {
+  gsap.to(".hero-text", {
     duration: 0.5,
     x: mouseX * 30,
     y: mouseY * 30,
-    ease: 'power2.out'
+    ease: "power2.out",
   });
 
-  gsap.to('.profile-frame', {
+  gsap.to(".profile-frame", {
     duration: 0.5,
     x: mouseX * -30,
     y: mouseY * -30,
-    ease: 'power2.out'
+    ease: "power2.out",
+  });
+});
+
+function handleTerminalSearch() {
+  const input = document.getElementById("terminalInput").value.trim().toLowerCase();
+  const result = document.getElementById("terminalResult");
+
+  const sectionMap = {
+    home: "home",
+    about: "about",
+    project: "projects",
+    projects: "projects",
+    contact: "contact",
+    growth: "growth",
+    education: "growth",
+    edu: "growth",
+    Certificate: "growth",
+    certificates: "growth",
+    skills: "about",
+
+    // Add more sections as needed
+  };
+  if (sectionMap[input]) {
+    result.textContent = `Redirecting to ${input}...`;
+    setTimeout(() => {
+      document.getElementById(sectionMap[input]).scrollIntoView({ behavior: "smooth" });
+      result.textContent = "";
+      document.getElementById("terminalInput").value = "";
+    }, 800);
+  } else if (input === "") {
+    result.textContent = "";
+  } else {
+    result.textContent = "Command not found";
+  }
+}
+
+document.querySelectorAll('.skill-item').forEach(item => {
+  item.addEventListener('click', function(e) {
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    ripple.style.left = `${e.offsetX}px`;
+    ripple.style.top = `${e.offsetY}px`;
+    ripple.style.width = ripple.style.height = `${Math.max(item.offsetWidth, item.offsetHeight)}px`;
+    item.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
   });
 });

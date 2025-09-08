@@ -24,10 +24,11 @@
     <!-- Loader -->
 
     <div class="loader">
-      <div class="loader-text"><img  src="assets/AM..png" alt="" srcset=""></div>
+      <div class="loader-text"><img  src="assets/AM..png" alt="" srcset=""  loading=""></div>
     </div>
 
     <!-- Navigation -->
+     
 
     <nav class="navbar">
       <div class="logo">
@@ -109,20 +110,26 @@
             <a href="#projects" class="cta-button">View Work</a>
             <a href="#contact" class="cta-button secondary">Contact Me</a>
           </div>
+
+          <div class="terminal-search">
+  <div class="terminal-header">terminal</div>
+  <div class="terminal-body">
+    <span class="terminal-prompt">anwesh@portfolio:~$</span>
+    <input type="text" id="terminalInput" placeholder="type a command..." oninput="handleTerminalSearch()" />
+    <div id="terminalResult"></div>
+  </div>
+</div>
+
         </div>
 
         <div class="hero-image">
           <div class="profile-frame">
             <img
-              src="assets/Picsart_24-11-22_19-13-19-185.jpg"
+              src="assets/IMG_20221105_212004_0467.jpg"
               alt="Anwesh Mund"
               class="profile-pic"
             />
-            <!-- <div class="icon-animation">
-              <img src="assets/ammmm.png" alt="Icon 1" class="animated-icon" />
-              <img src="assets/ammmm.png" alt="Icon 2" class="animated-icon" />
-              <img src="assets/ammmm.png" alt="Icon 3" class="animated-icon" />
-            </div> -->
+           
           </div>
         </div>
       </div>
@@ -151,10 +158,8 @@
             <h3 class="about-subtitle">Who am I?</h3>
 
             <p class="about-description">
-              Hello! I'm Anwesh Mund, a passionate Full Stack Developer with a
-              keen eye for creating beautiful and functional web experiences. I
-              specialize in building robust applications that deliver
-              exceptional user experiences.
+              Hello! I'm Anwesh Mund, an aspiring Software Development Engineer (SDE) with a keen interest in Data Structures & Algorithms and Web Development.
+I thrive on solving complex problems and building functional, user-friendly web applications. With a strong foundation in core programming and a growing skill set in modern web technologies, I’m eager to join a team where I can contribute, learn, and grow as a developer. I'm currently open to work and excited for new challenges that help me improve and create value.
             </p>
 
             <div class="about-stats">
@@ -172,51 +177,76 @@
             </div>
           </div>
 
-          <div class="tech-stack">
-            <h3>Tech Stack</h3>
-
-            <div class="tech-icons">
-              <div class="tech-icon">
-                <i class="fab fa-html5" title="HTML5"></i>
-
-                <span>HTML5</span>
-              </div>
-
-              <div class="tech-icon">
-                <i class="fab fa-css3-alt" title="CSS3"></i>
-
-                <span>CSS3</span>
-              </div>
-
-              <div class="tech-icon">
-                <i class="fab fa-js" title="JavaScript"></i>
-
-                <span>JavaScript</span>
-              </div>
-
-              <div class="tech-icon">
-                <i class="fab fa-react" title="React"></i>
-
-                <span>React</span>
-              </div>
-
-              <!-- <div class="tech-icon">
-                <i class="fab fa-node" title="Node.js"></i>
-
-                <span>Node.js</span> -->
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </section>
+    <section id="skills" class="skills-section">
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-card">
+    <div class="skills-list">
+      <div class="skill-item" data-tooltip="Markup language for web pages">
+        <i class="fab fa-html5"></i>
+        <span>HTML5</span>
+      </div>
+      <div class="skill-item" data-tooltip="Styling for web pages">
+        <i class="fab fa-css3-alt"></i>
+        <span>CSS3</span>
+      </div>
+      <div class="skill-item" data-tooltip="Programming language for web">
+        <i class="fab fa-js-square"></i>
+        <span>JavaScript</span>
+      </div>
+      <div class="skill-item" data-tooltip="Frontend library for UI">
+        <i class="fab fa-react"></i>
+        <span>React</span>
+      </div>
+      <div class="skill-item" data-tooltip="Object-oriented programming language">
+        <i class="fab fa-java"></i>
+        <span>Java</span>
+      </div>
+      <div class="skill-item" data-tooltip="High-performance programming language">
+        <i class="fab fa-cuttlefish"></i>
+        <span>C++</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Projects Section -->
+
+     <!-- Projects Section -->
 
     <section id="projects" class="projects">
       <h2 class="section-title">Featured Projects</h2>
 
       <div class="project-grid">
+         <div class="project-card">
+          <div class="project-image">
+            <img
+              src="assets/Screenshot 2024-11-22 225116.png"
+              alt="Project 3"
+            />
+          </div>
+
+          <div class="project-info">
+            <div>
+              <h3>Velocity Vault</h3>
+
+              <p>
+             <!-- A full-stack automotive web app that offers car maintenance in one plateform Built with a focus on responsive design, smooth user experience.  -->
+              </p>
+            </div>
+
+            <div class="project-links">
+              <a href="https://github.com/anweshmund/Velocity-vault.git" target="_blank"><i class="fab fa-github"></i> Code</a>
+
+              <a href="https://anweshmund.github.io/Velocity-vault/" target="_blank"
+                ><i class="fas fa-external-link-alt"></i> Live</a
+              >
+            </div>
+          </div>
+        </div>
+
         <div class="project-card">
           <div class="project-image">
             <img
@@ -229,15 +259,15 @@
             <div>
               <h3>Alumni Connect</h3>
 
-              <p>
+              <!-- <p>
                This project will help you to connected with Alumni where they share their experiences. The technologies were used - HTML, CSS, SCRIPT JS, SQL.
-              </p>
+              </p> -->
             </div>
 
             <div class="project-links">
-              <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
+              <a href="https://github.com/Anweshmund" target="_blank"><i class="fab fa-github"></i> Code</a>
 
-              <a href="#" target="_blank"
+              <a href="https://houseofspirits.github.io/alumniconnect/ " target="_blank"
                 ><i class="fas fa-external-link-alt"></i> Live</a
               >
             </div>
@@ -254,15 +284,15 @@
 
           <div class="project-info">
             <div>
-              <h3>Gymex</h3>
+              <h3>Kishan Mandi</h3>
 
               <p>
-                Gymex is an centralize website where evry thing will store in data base. The technologies were used - HTML, CSS, SCRIPT JS, SQL.
+               
               </p>
             </div>
 
             <div class="project-links">
-              <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
+              <a href="" target="_blank"><i class="fab fa-github"></i> Code</a>
 
               <a href="#" target="_blank"
                 ><i class="fas fa-external-link-alt"></i> Live</a
@@ -271,32 +301,7 @@
           </div>
         </div>
 
-        <div class="project-card">
-          <div class="project-image">
-            <img
-              src="assets/Screenshot 2024-11-22 225116.png"
-              alt="Project 3"
-            />
-          </div>
-
-          <div class="project-info">
-            <div>
-              <h3>Velocity Vault</h3>
-
-              <p>
-               The E.Store where you can purchase your bike gear and all. The technologies were used - HTML, CSS, SCRIPT JS and some framework.
-              </p>
-            </div>
-
-            <div class="project-links">
-              <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
-
-              <a href="#" target="_blank"
-                ><i class="fas fa-external-link-alt"></i> Live</a
-              >
-            </div>
-          </div>
-        </div>
+       
       </div>
     </section>
 
@@ -314,7 +319,7 @@
 
             <h3><a href="education.html">Education</a></h3>
 
-            <p>Bachelor of Technology in Computer Science</p>
+            <p>Master Computer Application </p>
 
             <span class="growth-date">2020 - 2024</span>
           </div>
@@ -324,7 +329,7 @@
               <i class="fas fa-certificate"></i>
             </div>
 
-            <h3>Certifications</h3>
+            <h3> <a href="certificate.html">Certifications</a></h3>
 
             <p>Full Stack Development, Web Design, Cloud Computing</p>
 
@@ -346,49 +351,80 @@
       </div>
     </section>
 
+    <!-- Skill Card Section -->
+<!-- <section id="skills" class="skills-section">
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-card">
+    <div class="skills-list">
+      <div class="skill-item" data-tooltip="Markup language for web pages">
+        <i class="fab fa-html5"></i>
+        <span>HTML5</span>
+      </div>
+      <div class="skill-item" data-tooltip="Styling for web pages">
+        <i class="fab fa-css3-alt"></i>
+        <span>CSS3</span>
+      </div>
+      <div class="skill-item" data-tooltip="Programming language for web">
+        <i class="fab fa-js-square"></i>
+        <span>JavaScript</span>
+      </div>
+      <div class="skill-item" data-tooltip="Frontend library for UI">
+        <i class="fab fa-react"></i>
+        <span>React</span>
+      </div>
+      <div class="skill-item" data-tooltip="Object-oriented programming language">
+        <i class="fab fa-java"></i>
+        <span>Java</span>
+      </div>
+      <div class="skill-item" data-tooltip="High-performance programming language">
+        <i class="fab fa-cuttlefish"></i>
+        <span>C++</span>
+      </div>
+    </div>
+  </div>
+</section> -->
+
     <!-- Contact Section -->
 
     <section id="contact" class="contact">
       <h2 class="section-title">Get In Touch</h2>
 
       <div class="contact-content">
-        <form id="contact-form" class="contact-form">
+        <form id="contact-form" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="dd4027fe-5fbc-44d8-aa37-155533f43250">
+          
           <div class="form-group">
-            <input type="text" id="name" required />
-
+            <input type="text" id="name" name="name" required />
             <label for="name">Name</label>
           </div>
 
           <div class="form-group">
-            <input type="email" id="email" required />
-
+            <input type="email" id="email" name="email" required />
             <label for="email">Email</label>
           </div>
 
           <div class="form-group">
-            <textarea id="message" required></textarea>
-
+            <textarea id="message" name="message" required></textarea>
             <label for="message">Message</label>
           </div>
 
           <button type="submit" class="submit-btn">
             <span>Send Message</span>
-
             <i class="fas fa-paper-plane"></i>
           </button>
         </form>
 
         <div class="social-links">
-          <a href="https://github.com/Anweshhmund" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://github.com/Anweshmund" target="_blank"><i class="fab fa-github"></i></a>
 
-          <a href="https://www.linkedin.com/in/anweshhmund" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="https://www.linkedin.com/in/anweshmund" target="_blank"><i class="fab fa-linkedin"></i></a>
 
           <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
     </section>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 
     <footer class="footer">
       <div class="footer-content">
@@ -418,7 +454,7 @@
           <ul>
             <li><i class="fas fa-envelope"></i> anweshmund25@gmail.com</li>
 
-            <li><i class="fas fa-phone"></i> +1234567890</li>
+            <li><i class="fas fa-phone"></i> +91 8917395626</li>
 
             <li><i class="fas fa-map-marker-alt"></i> Jalandhar, India</li>
           </ul>
@@ -428,13 +464,13 @@
           <h3 style="color: white">Follow Me</h3>
 
           <div class="footer-social">
-            <a href="#"assetsim><i class="fab fa-github"></i></a>
+            <a href="https://github.com/Anweshmund"assetsim><i class="fab fa-github"></i></a>
 
-            <a href="https://www.linkedin.com/in/anweshhmund"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.linkedin.com/in/anweshmund"><i class="fab fa-linkedin"></i></a>
 
-            <a href="https://github.com/Anweshhmund"><i class="fab fa-twitter"></i></a>
+            <a href=""><i class="fab fa-twitter"></i></a>
 
-            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
           </div>
         </div>
       </div>
