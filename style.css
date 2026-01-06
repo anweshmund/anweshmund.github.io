@@ -288,7 +288,7 @@ body {
   bottom: 40%;
 }
 
-/* Hero Section */
+/* Hero Section - Optimized for LCP */
 
 .hero {
   min-height: 100vh;
@@ -304,6 +304,10 @@ body {
   position: relative;
 
   overflow: hidden;
+  
+  /* Ensure hero content is visible immediately */
+  content-visibility: auto;
+  contain-intrinsic-size: 100vh;
 }
 
 .hero-content {
@@ -333,10 +337,19 @@ body {
 
   position: relative;
 
+  /* Start visible, animation will enhance */
+  opacity: 1;
+
+  transform: translateY(0);
+
+  /* Animation will be applied by JS if available */
+  animation: none;
+}
+
+/* Apply animation only if JS is enabled and GSAP loads */
+.hero-text h1.animated {
   opacity: 0;
-
   transform: translateY(50px);
-
   animation: fadeInUp 1s forwards;
 }
 
@@ -530,6 +543,10 @@ body {
   height: 100%;
 
   object-fit: cover;
+  
+  /* Optimize image rendering */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
  
 

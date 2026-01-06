@@ -8,23 +8,44 @@
 
     <title>Anwesh Mund | Portfolio</title>
 
+    <!-- Resource Hints for Performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://api.web3forms.com" crossorigin />
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="style.css" as="style" />
+    <link rel="preload" href="assets/IMG_20221105_212004_0467.jpg" as="image" />
+    <link rel="preload" href="assets/ammmm.png" as="image" />
+
+    <!-- Critical CSS inline or load first -->
     <link rel="stylesheet" href="style.css" />
 
+    <!-- Defer Non-Critical CSS -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      />
+    </noscript>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Defer GSAP Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
   </head>
 
   <body>
     <!-- Loader -->
 
     <div class="loader">
-      <div class="loader-text"><img  src="assets/AM..png" alt="" srcset=""  loading=""></div>
+      <div class="loader-text"><img  src="assets/AM..png" alt="" srcset=""  loading="eager" fetchpriority="high"></div>
     </div>
 
     <!-- Navigation -->
@@ -33,7 +54,7 @@
     <nav class="navbar">
       <div class="logo">
         <span class="logo-text">
-          <img class="AM" src="assets/ammmm.png" alt="AM Logo">
+          <img class="AM" src="assets/ammmm.png" alt="AM Logo" loading="eager" fetchpriority="high" width="70" height="70">
         </span>
 
         <div class="logo-hover">Anwesh Mund</div>
@@ -128,6 +149,10 @@
               src="assets/IMG_20221105_212004_0467.jpg"
               alt="Anwesh Mund"
               class="profile-pic"
+              loading="eager"
+              fetchpriority="high"
+              width="450"
+              height="450"
             />
            
           </div>
@@ -147,7 +172,7 @@
       <div class="about-content">
         <div class="about-left">
           <div class="about-image">
-            <img src="assets/Picsart_24-11-22_19-10-29-144.jpg" alt="Anwesh Mund" />
+            <img src="assets/Picsart_24-11-22_19-10-29-144.jpg" alt="Anwesh Mund" loading="lazy" width="400" height="400" />
 
             <div class="about-shape"></div>
           </div>
@@ -225,6 +250,9 @@ I thrive on solving complex problems and building functional, user-friendly web 
             <img
               src="assets/Screenshot 2024-11-22 225116.png"
               alt="Project 3"
+              loading="lazy"
+              width="400"
+              height="200"
             />
           </div>
 
@@ -252,6 +280,9 @@ I thrive on solving complex problems and building functional, user-friendly web 
             <img
               src="assets/Screenshot 2024-11-11 003419.png"
               alt="Project 1"
+              loading="lazy"
+              width="400"
+              height="200"
             />
           </div>
 
@@ -279,6 +310,9 @@ I thrive on solving complex problems and building functional, user-friendly web 
             <img
               src="assets/Screenshot 2024-11-22 225031.png"
               alt="Project 2"
+              loading="lazy"
+              width="400"
+              height="200"
             />
           </div>
 
@@ -425,6 +459,30 @@ I thrive on solving complex problems and building functional, user-friendly web 
     </section>
 
     <script src="script.js" defer></script>
+    
+    <!-- Optimize Font Awesome loading -->
+    <script>
+      // Load Font Awesome asynchronously if not already loaded
+      (function() {
+        const link = document.querySelector('link[href*="font-awesome"]');
+        if (link && (link.media === 'print' || !link.media)) {
+          link.media = 'all';
+        }
+      })();
+      
+      // Ensure hero content is visible immediately
+      document.addEventListener('DOMContentLoaded', function() {
+        const heroH1 = document.querySelector('.hero-text h1');
+        if (heroH1) {
+          // Only add animation class if GSAP is available
+          setTimeout(function() {
+            if (typeof gsap !== 'undefined') {
+              heroH1.classList.add('animated');
+            }
+          }, 100);
+        }
+      });
+    </script>
 
     <footer class="footer">
       <div class="footer-content">

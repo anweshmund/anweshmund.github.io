@@ -1,6 +1,59 @@
-// Initialize GSAP
+// Initialize GSAP - Wait for GSAP to load
+let gsapInitialized = false;
 
-gsap.registerPlugin(ScrollTrigger);
+function initGSAP() {
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    if (!gsapInitialized) {
+      gsap.registerPlugin(ScrollTrigger);
+      gsapInitialized = true;
+    }
+    return true;
+  }
+  return false;
+}
+
+// Try to initialize GSAP immediately, or wait for it to load
+if (!initGSAP()) {
+  // Wait for GSAP scripts to load
+  const checkInterval = setInterval(() => {
+    if (initGSAP()) {
+      clearInterval(checkInterval);
+      // Initialize animations after GSAP is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          requestAnimationFrame(() => {
+            initializeAnimations();
+            initializeTypingAnimation();
+            initializeFooterAnimations();
+          });
+        });
+      } else {
+        requestAnimationFrame(() => {
+          initializeAnimations();
+          initializeTypingAnimation();
+          initializeFooterAnimations();
+        });
+      }
+    }
+  }, 50);
+} else {
+  // GSAP already loaded, initialize animations
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      requestAnimationFrame(() => {
+        initializeAnimations();
+        initializeTypingAnimation();
+        initializeFooterAnimations();
+      });
+    });
+  } else {
+    requestAnimationFrame(() => {
+      initializeAnimations();
+      initializeTypingAnimation();
+      initializeFooterAnimations();
+    });
+  }
+}
 
 // DOM Elements
 
@@ -9,67 +62,88 @@ const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
 const navLinks = document.querySelectorAll(".nav-link");
 let lastScroll = 0;
-// Loader Animation
+// Loader Animation - Optimized for LCP
+// Hide loader faster to improve LCP
+document.addEventListener("DOMContentLoaded", () => {
+  const loader = document.querySelector(".loader");
+  // Use requestAnimationFrame for better performance
+  requestAnimationFrame(() => {
+    if (loader) {
+      // Reduce loader display time
+      setTimeout(() => {
+        loader.style.opacity = "0";
+        loader.style.transition = "opacity 0.3s ease";
+        setTimeout(() => {
+          loader.style.display = "none";
+        }, 300);
+      }, 500); // Reduced from waiting for full page load
+    }
+  });
+});
+
 window.addEventListener("load", () => {
   const loader = document.querySelector(".loader");
-  gsap.to(loader, {
-    opacity: 0,
-    duration: 1,
-    onComplete: () => {
+  // Ensure loader is hidden even if DOMContentLoaded didn't catch it
+  if (loader && loader.style.display !== "none") {
+    loader.style.opacity = "0";
+    loader.style.transition = "opacity 0.3s ease";
+    setTimeout(() => {
       loader.style.display = "none";
-    },
-  });
+    }, 300);
+  }
 
   // CV download functionality
-const cvButton = document.querySelector(".cv-download");
+  const cvButton = document.querySelector(".cv-download");
+  if (cvButton) {
+    cvButton.addEventListener("click", (e) => {
+      e.preventDefault();
 
-cvButton.addEventListener("click", (e) => {
-  e.preventDefault();
+      // Direct download URL from Google Drive
+      const downloadUrl = "https://drive.google.com/uc?export=download&id=1SKghxNAbGj_6f6Tvz2KP4cb3gp6m-1jx";
 
-  // Direct download URL from Google Drive
-  const downloadUrl = "https://drive.google.com/uc?export=download&id=1SKghxNAbGj_6f6Tvz2KP4cb3gp6m-1jx";
+      // Create a temporary anchor element to start download
+      const a = document.createElement("a");
+      a.href = downloadUrl;
+      a.download = "Anwesh_mund(Resume).pdf"; // This name will be used for the downloaded file
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
 
-  // Create a temporary anchor element to start download
-  const a = document.createElement("a");
-  a.href = downloadUrl;
-  a.download = "Anwesh_mund(Resume).pdf"; // This name will be used for the downloaded file
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-
-  alert("CV download started!");
-});
-  // Initial animations
-  initializeAnimations();
-
-  // Initialize typing animation
-  initializeTypingAnimation();
-
-  // Footer animations and interactions
-  initializeFooterAnimations();
+      alert("CV download started!");
+    });
+  }
 });
 
 // Initialize all animations
 function initializeAnimations() {
-  // Hero content animations
+  // Only run if GSAP is available
+  if (typeof gsap === 'undefined') return;
+  
+  // Add animated class to hero h1 for CSS animation fallback
+  const heroH1 = document.querySelector(".hero-text h1");
+  if (heroH1) {
+    heroH1.classList.add('animated');
+  }
+  
+  // Hero content animations - reduced delays for faster LCP
   gsap.from(".hero-text h1", {
     y: 100,
     opacity: 0,
-    duration: 1,
-    delay: 0.5,
+    duration: 0.8,
+    delay: 0.2,
   });
   gsap.from(".hero-text p", {
     y: 50,
     opacity: 0,
-    duration: 1,
-    delay: 0.8,
+    duration: 0.8,
+    delay: 0.4,
   });
 
   gsap.from(".hero-image", {
     x: 100,
     opacity: 0,
-    duration: 1,
-    delay: 1,
+    duration: 0.8,
+    delay: 0.3,
   });
 
   // Scroll animations
@@ -80,6 +154,9 @@ function initializeAnimations() {
 // Scroll-based animations
 
 function initializeScrollAnimations() {
+  // Only run if GSAP is available
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  
   gsap.from(".about-content", {
     scrollTrigger: {
       trigger: ".about-content",
@@ -411,19 +488,14 @@ formGroups.forEach((group) => {
   });
 });
 
-// CV download
-
-const cvButton = document.querySelector(".cv-download");
-
-cvButton.addEventListener("click", (e) => {
-  e.preventDefault();
-
-  alert("CV download started!");
-});
+// CV download - removed duplicate (already handled above)
 
 // Footer animations and interactions
 
 function initializeFooterAnimations() {
+  // Only run if GSAP is available
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  
   // Animate footer sections on scroll
 
   gsap.from(".footer-section", {
@@ -561,8 +633,10 @@ function initializeTypingAnimation() {
   type();
 }
 
-// Add mouse move parallax effect to the hero section
+// Add mouse move parallax effect to the hero section - only if GSAP is loaded
 document.addEventListener("mousemove", (e) => {
+  if (typeof gsap === 'undefined') return;
+  
   const hero = document.querySelector(".hero");
   const mouseX = e.clientX / window.innerWidth - 0.5;
   const mouseY = e.clientY / window.innerHeight - 0.5;
